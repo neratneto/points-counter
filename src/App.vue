@@ -1,13 +1,19 @@
 <template>
 <div id="app">
-  <div id="nav">
-    <span>Contador de pontuação</span> |
-    <span>Good luck suckers</span>
-  </div>
+  <toolbar />
   <router-view />
 </div>
 </template>
 
+<script>
+import Toolbar from './components/Toolbar.vue'
+
+export default {
+  components: {
+    Toolbar
+  }
+}
+</script>
 <style>
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
