@@ -1,25 +1,41 @@
 <template>
 <v-container>
   <v-card class="ma-3 pa-4">
+    <v-layout class="my-4" column align-center>
+      <p class="display-2 my-0">{{ totalEu.toLocaleString() }} / {{ totalEla.toLocaleString() }}</p>
+      <v-divider width="160px" />
+    </v-layout>
     <v-layout wrap>
-      <v-flex>
+      <v-flex xs6>
         <v-card class="pa-3 ma-2 elevation-2">
-          <v-toolbar color="green" class="text-xs-center">
-            <p style="color: white" contenteditable="true" class="title">EU</p>
-          </v-toolbar>
-          <v-text-field v-model="inputEu" @keyup.enter="somaEu" />
+          <v-layout class="my-3" column align-center>
+            <p contenteditable="true" class="my-0 text-xs-center headline">EU</p>
+            <v-divider width="80px" />
+          </v-layout>
+
+          <v-layout class="ma-4" wrap>
+            <v-text-field v-model="inputEu" @keyup.enter="somaEu" />
+            <v-btn @click="somaEu" icon>
+              <v-icon>add_circle</v-icon>
+            </v-btn>
+          </v-layout>
           <p :key="score" v-for="score in euScoreList"><span>{{ score }}</span></p>
-          <p><strong>{{ totalEu }}</strong></p>
         </v-card>
       </v-flex>
-      <v-flex>
+      <v-flex xs6>
         <v-card class="pa-3 ma-2 elevation-2">
-          <v-toolbar color="blue" class="text-xs-center">
-            <p style="color: white" contenteditable="true" class="title">ELA</p>
-          </v-toolbar>
-          <v-text-field v-model="inputEla" @keyup.enter="somaEla" />
+          <v-layout class="my-3" column align-center>
+            <p contenteditable="true" class="my-0 text-xs-center headline">ELA</p>
+            <v-divider width="80px" />
+          </v-layout>
+
+          <v-layout class="ma-4" wrap>
+            <v-text-field v-model="inputEla" @keyup.enter="somaEla" />
+            <v-btn @click="somaEla" icon>
+              <v-icon>add_circle</v-icon>
+            </v-btn>
+          </v-layout>
           <p :key="score" v-for="score in elaScoreList"><span>{{ score }}</span></p>
-          <p><strong>{{ totalEla }}</strong></p>
         </v-card>
       </v-flex>
     </v-layout>
@@ -54,11 +70,13 @@ export default {
   },
   methods: {
     somaEu(event) {
-      this.euScoreList.push(event.target.value)
+      const value = event.target.value || this.inputEu
+      this.euScoreList.push(value)
       this.inputEu = null
     },
     somaEla(event) {
-      this.elaScoreList.push(event.target.value)
+      const value = event.target.value || this.inputEla
+      this.elaScoreList.push(value)
       this.inputEla = null
     }
   }
