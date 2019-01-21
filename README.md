@@ -1,4 +1,4 @@
-# contador-canastra
+# contador-somador
 
 ## Project setup
 ```

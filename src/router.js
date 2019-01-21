@@ -1,15 +1,15 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Canastra from './views/Canastra.vue'
+import Somador from './views/Somador.vue'
 import Truco from './views/Truco.vue'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [{
-    path: '/canastra',
-    name: 'canastra',
-    component: Canastra
+    path: '/somador',
+    name: 'somador',
+    component: Somador
   }, {
     path: '/truco',
     name: 'truco',
