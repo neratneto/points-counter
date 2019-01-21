@@ -1,21 +1,6 @@
-# contador-somador
+# Points Counter
 
-## Project setup
-```
-npm install
-```
+Simple Vue.js points counter.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
+Language: Portuguese
+Has an addition counter and a truco counter - a famous brazilian game.
