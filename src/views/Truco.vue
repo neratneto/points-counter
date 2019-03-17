@@ -1,40 +1,46 @@
 <template lang="html">
-  <v-container>
-    <v-card v-if="escuro" color="black" style="color: white">
-<p >Escuro!</p>
-<p>Ninguém vê nada!</p>
-<p>Quem ganhou?</p>
-<v-btn @click="ganharEscuro('nos')">Nos</v-btn>
-<v-btn @click="ganharEscuro('eles')">Eles</v-btn>
+  <v-container align-center fill-height justify-center>
+    <v-card v-if="escuro" color="black" class="escurinho elevation-5">
+      <p class="title font-weight-black">11 a 11</p>
+      <p class="title font-weight-black">Escurinho!</p>
+      <p class="title font-weight-black">Ninguém vê nada!</p>
+<v-divider class="my-5" dark />
+      <p class="title font-weight-black">Quem ganhou?</p>
+      <v-btn large  @click="ganharEscuro('nos')">Nos</v-btn>
+      <v-btn large  @click="ganharEscuro('eles')">Eles</v-btn>
     </v-card>
-  <v-card v-else class="ma-3 pa-4">
-    <v-layout  v-if="!winner" wrap>
+    <v-layout  v-else-if="!winner" wrap>
       <v-dialog persistent width="300px" v-model="maoDeOnze.dialog">
       <v-card class="pa-2">
         <p class="headline">Mão de Onze!</p>
         <p class="subheading my-4">Vão jogar?</p>
-        <v-btn color="green" @click="simOnze">Sim</v-btn>
-        <v-btn color="red" @click="naoOnze">Não</v-btn>
+        <v-btn large color="green" @click="simOnze">Sim</v-btn>
+        <v-btn large color="red" @click="naoOnze">Não</v-btn>
       </v-card>
     </v-dialog >
-      <v-flex xs6 class="my-3 "  >
-        <p>Nós</p><p>{{ nosCounter }}</p>
-        <v-btn class="green" small :disabled="maoDeOnze.dialog" @click="somarnos">Somar {{ valorRodada }} tentos</v-btn>
+      <v-flex class="my-3 "  >
+        <p class="title">Nós</p><p class="title">{{ nosCounter }}</p>
+        <v-btn large class="green" small :disabled="maoDeOnze.dialog" @click="somarnos">Somar {{ valorRodada }} tentos <v-icon right>add</v-icon></v-btn>
       </v-flex>
-      <v-flex xs6 class="my-3" >
-        <p>Eles</p><p>{{ elesCounter }}</p>
-        <v-btn class="green" small :disabled="maoDeOnze.dialog" @click="somareles">Somar {{ valorRodada }} tentos</v-btn>
+      <v-flex class="my-3" >
+        <p class="title">Eles</p><p class="title">{{ elesCounter }}</p>
+        <v-btn large class="green" small :disabled="maoDeOnze.dialog" @click="somareles">Somar {{ valorRodada }} tentos <v-icon right>add</v-icon></v-btn>
       </v-flex>
       <v-flex xs12 class="my-5">
-      <v-btn class="red" @click="voltar">Voltar pontuação</v-btn>
-      <v-btn class="yellow" @click="aumentarTento">Aumentar tento</v-btn>
+      <v-btn large class="red" @click="voltar">Voltar pontuação <v-icon right>undo</v-icon></v-btn>
+      <v-btn large class="yellow" @click="aumentarTento">Aumentar tento <v-icon right>trending_up</v-icon></v-btn>
+      <v-layout class="mt-5" row wrap>
+        <v-spacer />
+        <v-btn @click="reset">Recomeçar jogo<v-icon right>settings_backup_restore</v-icon></v-btn>
+      </v-layout>
     </v-flex>
     </v-layout>
-    <v-layout v-else wrap>
-      <p>{{ this.winner }} ganharam!</p>
-      <v-btn color="blue" @click="reset">Próxima rodada</v-btn>
-    </v-layout>
-  </v-card>
+    <v-card v-else class="pa-4 elevation-5">
+      <v-icon large class="my-2">done_outline</v-icon>
+      <v-divider class="my-3" />
+      <p class="headline my-4">Parabéns para {{ this.winner }}, ganhadores!</p>
+      <v-btn large color="blue" @click="reset">Próxima rodada</v-btn>
+    </v-card>
 </v-container>
 </template>
 
@@ -57,10 +63,10 @@ export default {
   }),
   watch: {
     nosCounter(value, oldvalue) {
-      this.pointsWatcher(value, oldvalue, 'nos')
+      this.pointsWatcher()
     },
     elesCounter(value, oldvalue) {
-      this.pointsWatcher(value, oldvalue, 'eles')
+      this.pointsWatcher()
     }
   },
   methods: {
@@ -105,18 +111,20 @@ export default {
         this.ultimaRodada.valor = -this.ultimaRodada.valor
       }
     },
-    pointsWatcher(value, oldvalue, time) {
-      if (value === 11) {
-        if (this.nosCounter === this.elesCounter) {
-          this.escuro = true
+    pointsWatcher() {
+      for (let time of ['nos', 'eles']) {
+        if (this[`${time}Counter`] === 11) {
+          if (this.nosCounter === this.elesCounter) {
+            this.escuro = true
+          }
+          this.maoDeOnze = {
+            dialog: true,
+            quem: time
+          }
         }
-        this.maoDeOnze = {
-          dialog: true,
-          quem: time
+        if (this[`${time}Counter`] >= 12) {
+          this.winner = time
         }
-      }
-      if (value >= 12) {
-        this.winner = time
       }
     },
     reset() {
@@ -148,4 +156,9 @@ export default {
 </script>
 
 <style lang="css">
+.escurinho {
+  color: white !important;
+  border-radius: 16px !important;
+  padding: 64px;
+}
 </style>
