@@ -7,6 +7,9 @@ Vue.use(Router)
 
 export default new Router({
   routes: [{
+    path: '/',
+    redirect: '/somador'
+  }, {
     path: '/somador',
     name: 'somador',
     component: Somador
