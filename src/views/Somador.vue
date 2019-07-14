@@ -16,7 +16,7 @@
           </v-layout>
 
           <v-layout class="ma-4" wrap>
-            <v-text-field v-model="playerObject.input" @keyup.enter="soma(playerIndex)" type="number" />
+            <v-text-field v-model="playerObject.input" @keyup.enter="soma(playerIndex)" inputmode="numeric" />
             <v-btn @click="soma(playerIndex)" icon>
               <v-icon>add_circle</v-icon>
             </v-btn>
