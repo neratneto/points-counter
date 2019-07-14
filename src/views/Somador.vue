@@ -2,7 +2,7 @@
 <v-container>
   <v-layout>
     <v-btn icon @click="resetPlayers">
-      <v-icon>clear</v-icon>
+      <v-icon>clear_all</v-icon>
     </v-btn>
     <v-spacer />
     <v-btn icon @click="addPlayer">
