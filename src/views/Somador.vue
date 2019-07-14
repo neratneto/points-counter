@@ -1,6 +1,9 @@
 <template>
 <v-container>
   <v-layout>
+    <v-btn icon @click="resetPlayers">
+      <v-icon>clear</v-icon>
+    </v-btn>
     <v-spacer />
     <v-btn icon @click="addPlayer">
       <v-icon>add</v-icon>
@@ -54,11 +57,15 @@ export default {
         input: null,
         scoreList: []
       })
+    },
+    resetPlayers() {
+      this.dynamicPlayers = []
+      this.addPlayer()
+      this.addPlayer()
     }
   },
   mounted() {
-    this.addPlayer()
-    this.addPlayer()
+    this.resetPlayers()
   }
 }
 </script>
