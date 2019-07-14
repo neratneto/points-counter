@@ -24,7 +24,7 @@
               <v-icon>add_circle</v-icon>
             </v-btn>
           </v-layout>
-          <p :key="score" v-for="(scoreIndex, score) in playerObject.scoreList"><v-btn flat @click="deleteScore(playerIndex, scoreIndex)"><v-icon left>delete</v-icon>{{ score }}</v-btn></p>
+          <p :key="score" v-for="(score, scoreIndex) in playerObject.scoreList"><v-btn flat @click="deleteScore(playerIndex, scoreIndex)"><v-icon left>delete</v-icon>{{ score }}</v-btn></p>
         </v-card>
       </v-flex>
     </v-layout>
