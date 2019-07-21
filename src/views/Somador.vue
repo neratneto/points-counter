@@ -1,6 +1,9 @@
 <template>
 <v-container>
   <v-layout>
+    <v-btn icon @click="resetPlayers">
+      <v-icon>clear_all</v-icon>
+    </v-btn>
     <v-spacer />
     <v-btn icon @click="addPlayer">
       <v-icon>add</v-icon>
@@ -16,12 +19,12 @@
           </v-layout>
 
           <v-layout class="ma-4" wrap>
-            <v-text-field v-model="playerObject.input" @keyup.enter="soma(playerIndex)" type="number" />
+            <v-text-field v-model="playerObject.input" @keyup.enter="soma(playerIndex)" inputmode="numeric" />
             <v-btn @click="soma(playerIndex)" icon>
               <v-icon>add_circle</v-icon>
             </v-btn>
           </v-layout>
-          <p :key="score" v-for="score in playerObject.scoreList"><span>{{ score }}</span></p>
+          <p :key="score" v-for="(score, scoreIndex) in playerObject.scoreList"><v-btn flat @click="deleteScore(playerIndex, scoreIndex)"><v-icon left>delete</v-icon>{{ score }}</v-btn></p>
         </v-card>
       </v-flex>
     </v-layout>
@@ -47,6 +50,9 @@ export default {
       this.dynamicPlayers[playerIndex].scoreList.push(this.dynamicPlayers[playerIndex].input)
       this.dynamicPlayers[playerIndex].input = null
     },
+    deleteScore(playerIndex, scoreIndex) {
+      this.$delete(this.dynamicPlayers[playerIndex].scoreList, scoreIndex)
+    },
     addPlayer() {
       const newPlayerName = `Jogador ${this.dynamicPlayers.length + 1}`
       this.dynamicPlayers.push({
@@ -54,11 +60,15 @@ export default {
         input: null,
         scoreList: []
       })
+    },
+    resetPlayers() {
+      this.dynamicPlayers = []
+      this.addPlayer()
+      this.addPlayer()
     }
   },
   mounted() {
-    this.addPlayer()
-    this.addPlayer()
+    this.resetPlayers()
   }
 }
 </script>
