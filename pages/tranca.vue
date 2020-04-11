@@ -13,7 +13,7 @@
         <v-icon>add</v-icon>
       </v-btn>
     </v-layout>
-    <v-card class="ma-3 pa-4">
+    <v-card class="ma-3 pa-4" v-if="currentGame">
       <v-layout wrap>
         <v-flex
           v-for="(playerObject, playerIndex) in currentGame.dynamicPlayers"
@@ -146,24 +146,27 @@ export default {
           new: true
         }
       }); // creates a new game and saves the id
-      this.$router.push(`/tranca?gameId=${newGameId}`)
+      this.$router.replace({query: { gameId: newGameId }})
+      this.init(newGameId)
+      this.resetPlayers()
+    },
+    init(gameId) {
+      this.gameId = gameId;
+      this.currentGame = this.getDocument({
+        collectionName,
+        documentId: gameId
+      });
     }
   },
   mounted() {
     this.getCollection(collectionName).then(async () => {
-      this.gameId = this.$route.query.gameId;
-      this.currentGame = this.getDocument({
-        collectionName,
-        documentId: this.gameId
-      });
-      if (this.currentGame === undefined || !this.gameId) await this.createGame();
-      else if (this.currentGame.new) {
-        await this.updateDocument({
-          collectionName,
-          documentId: this.gameId,
-          body: { new: false }
-        });
-        this.resetPlayers();
+      const routeGameId = this.$route.query.gameId;
+      if (!routeGameId) {
+        await this.createGame()
+      } else {
+        console.log(`got game id from route: ${routeGameId}`)
+        this.init(routeGameId)
+        if (this.currentGame === undefined) await this.createGame();
       }
     });
   }

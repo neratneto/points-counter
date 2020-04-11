@@ -3,9 +3,9 @@ import Router from 'vue-router'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
-const _78c5a400 = () => interopDefault(import('../pages/tranca.vue' /* webpackChunkName: "pages/tranca" */))
-const _05590308 = () => interopDefault(import('../pages/truco.vue' /* webpackChunkName: "pages/truco" */))
-const _7f7c9b6b = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
+const _0e0e79b1 = () => interopDefault(import('../pages/tranca.vue' /* webpackChunkName: "pages/tranca" */))
+const _c6bd0eaa = () => interopDefault(import('../pages/truco.vue' /* webpackChunkName: "pages/truco" */))
+const _1eca959a = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
 Vue.use(Router)
 
@@ -18,15 +18,15 @@ export const routerOptions = {
 
   routes: [{
     path: "/tranca",
-    component: _78c5a400,
+    component: _0e0e79b1,
     name: "tranca"
   }, {
     path: "/truco",
-    component: _05590308,
+    component: _c6bd0eaa,
     name: "truco"
   }, {
     path: "/",
-    component: _7f7c9b6b,
+    component: _1eca959a,
     name: "index"
   }],
 

@@ -12,8 +12,8 @@
         <v-divider />
         <v-card-text class="my-4">
           <h2  class="mx-3 mb-4">Quero criar um novo jogo</h2>
-          <v-btn class="ma-3" color="primary" @click="newGame('truco')">Novo contador de truco</v-btn>
-          <v-btn class="ma-3" color="success" @click="newGame('tranca')">Novo contador de tranca</v-btn>
+          <v-btn class="ma-3" color="primary" @click="goToGame('new', 'truco')">Novo contador de truco</v-btn>
+          <v-btn class="ma-3" color="success" @click="goToGame('new', 'tranca')">Novo contador de tranca</v-btn>
         </v-card-text>
       </v-card>
   </v-layout>
@@ -29,19 +29,9 @@ export default {
   }),
   methods: { // Functions of the page
     ...mapActions(["addDocument"]), // maps the existing methods
-    async newGame(gameType) {
-      this.loading = true; // start the loading
-      const newGameId = await this.addDocument({
-        collectionName: gameType,
-        body: {
-          new: true
-        }
-      }); // creates a new game and saves the id
-      this.goToGame(newGameId, gameType); // reroutes to the game id
-    },
     goToGame(gameId, gameType) {
       this.loading = true; // start the loading
-      this.$router.push(`/${gameType}?gameId=${gameId}`); // reroutes to the new game's route
+      this.$router.push({ name: gameType, query: { gameId } }); // reroutes to the new game's route
       this.loading = false; // stops the loading
     }
   }
