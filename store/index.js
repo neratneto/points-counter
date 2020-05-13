@@ -73,6 +73,11 @@ const actions = {
     const url = await uploadTask.ref.getDownloadURL()
     return url
   },
+  async deleteImage({ commit }, url) {
+    const ref = this.$fireStorage.refFromURL(url)
+    await ref.delete()
+    console.log('Image deleted')
+  },
   async getCollection({ commit }, collectionName) {
     return new Promise((resolve, reject) => {
       let source;

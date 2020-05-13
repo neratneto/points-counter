@@ -31,6 +31,7 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <p style="font-size: 8px" class="ml-2 mt-2">{{ memory.sender }}</p>
+          <v-btn v-if="isAdmin" @click="deleteNote(memory)">Apagar</v-btn>
         </v-card-actions>
       </v-card>
     </v-flex>
@@ -77,7 +78,8 @@ export default {
       sender: null,
       note: null,
       loading: false,
-      expand: false
+      expand: false,
+      isAdmin: false
     };
   },
   computed: {
@@ -90,7 +92,9 @@ export default {
       "updateDocument",
       "getCollection",
       "addDocument",
-      "addImage"
+      "addImage",
+      'deleteDocument',
+      'deleteImage'
     ]),
     async getMemories() {
       await this.getCollection("louniver");
@@ -114,10 +118,16 @@ export default {
       this.note = null;
       this.sender = null;
       this.loading = false;
+    },
+    async deleteNote(memory) {
+        await this.deleteImage(memory.photoURL)
+        await this.deleteDocument({ collectionName: 'louniver', documentId: memory.id })
     }
   },
   async mounted() {
     await this.getMemories();
+    this.isAdmin = localStorage.getItem('isAdmin')
+    localStorage.setItem('isAdmin', true)
   }
 };
 </script>
