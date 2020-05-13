@@ -2,7 +2,10 @@
   <v-container flex align-items="center" justify-content="center">
     <v-card>
       <v-card-title>Seja bem vindo ao album de niver da Lou!</v-card-title>
-      <v-card-text>Abaixo você terá um arcabouço de nostalgia, aproveite.</v-card-text>
+      <v-card-text>
+        <span>Abaixo você terá um arcabouço de nostalgia, aproveite.</span>
+        <p>Lembrando que é surpresa, mandem pros amigos mas não pra ela!</p>
+      </v-card-text>
       <v-card-text class="mt-3">
         <a @click="expand = !expand">Cadê as memórias?</a>
       </v-card-text>
