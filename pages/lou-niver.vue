@@ -7,7 +7,7 @@
         <a @click="expand = !expand">Cadê as memórias?</a>
       </v-card-text>
     </v-card>
-    <v-flex style="overflow-x: auto;" :class="expand && 'flex-column'" class="d-flex ma-2">
+    <v-flex style="overflow-x: auto;" :class="expand && 'flex-column'" class="d-flex my-2">
       <v-card
         class="ma-2"
         width="300"
@@ -127,7 +127,6 @@ export default {
   async mounted() {
     await this.getMemories();
     this.isAdmin = localStorage.getItem('isAdmin')
-    localStorage.setItem('isAdmin', true)
   }
 };
 </script>
