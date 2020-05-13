@@ -3,9 +3,10 @@ import Router from 'vue-router'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
-const _0e0e79b1 = () => interopDefault(import('../pages/tranca.vue' /* webpackChunkName: "pages/tranca" */))
-const _c6bd0eaa = () => interopDefault(import('../pages/truco.vue' /* webpackChunkName: "pages/truco" */))
-const _1eca959a = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
+const _713f4c3d = () => interopDefault(import('../pages/lou-niver.vue' /* webpackChunkName: "pages/lou-niver" */))
+const _5e25a8ee = () => interopDefault(import('../pages/tranca.vue' /* webpackChunkName: "pages/tranca" */))
+const _468da85a = () => interopDefault(import('../pages/truco.vue' /* webpackChunkName: "pages/truco" */))
+const _5ee248c2 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
 Vue.use(Router)
 
@@ -17,16 +18,20 @@ export const routerOptions = {
   scrollBehavior,
 
   routes: [{
+    path: "/lou-niver",
+    component: _713f4c3d,
+    name: "lou-niver"
+  }, {
     path: "/tranca",
-    component: _0e0e79b1,
+    component: _5e25a8ee,
     name: "tranca"
   }, {
     path: "/truco",
-    component: _c6bd0eaa,
+    component: _468da85a,
     name: "truco"
   }, {
     path: "/",
-    component: _1eca959a,
+    component: _5ee248c2,
     name: "index"
   }],
 

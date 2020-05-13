@@ -1,5 +1,14 @@
 <template>
   <v-layout column justify-center align-center>
+    <v-card class="pa-3 mb-5">
+      <v-card-title @click="goToGame('lou-niver', '')">Niver da Lou?</v-card-title>
+
+      <v-card-text>
+      <v-btn @click="goToGame('', 'lou-niver')" large  color="primary">Clique aqui</v-btn>
+
+        <p class="pt-5 mt-5">Quer explorar? Fique à vontade!</p>
+        </v-card-text>
+    </v-card>
       <v-card class="pa-3">
         <v-card-title class="headline">Bem-vindo ao contador!</v-card-title>
         <v-divider class="mt-4" />

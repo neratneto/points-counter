@@ -7,7 +7,8 @@ Vue.use(Vuex);
 const state = () => ({
   initialized: false,
   tranca: [],
-  truco: []
+  truco: [],
+  louniver: []
 });
 
 const mutations = {
@@ -57,6 +58,20 @@ const actions = {
 
     dispatch("getCollections", ["truco", "tranca"]);
     // Subsequent queries will use persistence, if it was enabled successfully
+  },
+  async addImage({ commit }, file) {
+    var storageRef = this.$fireStorage.ref();
+    // Create file metadata including the content type
+    var metadata = {
+      contentType: 'image/jpeg',
+    };
+    
+    // Upload the file and metadata
+    var uploadTask = await storageRef.child(`images/lou-niver/${file.name}`).put(file, metadata);
+    console.log(uploadTask)
+    // Upload completed successfully, now we can get the download URL
+    const url = await uploadTask.ref.getDownloadURL()
+    return url
   },
   async getCollection({ commit }, collectionName) {
     return new Promise((resolve, reject) => {

@@ -76,7 +76,7 @@ export default {
           measurementId: "G-0T9VS5L1MJ"
         }
       },
-      useOnly: ['firestore']
+      useOnly: ['firestore', 'storage']
     }]
   ],
   /*
