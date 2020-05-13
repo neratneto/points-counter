@@ -10,7 +10,12 @@
         <a @click="expand = !expand">Cadê as memórias?</a>
       </v-card-text>
     </v-card>
-    <v-flex style="overflow-x: auto;" :class="expand && 'flex-column'" class="d-flex my-2">
+    <v-flex class="fill-height flex" v-if="memoriesLoading">
+      <v-row style="min-height: 400px" align="center" justify="center">
+        <v-progress-circular indeterminate color="primary" size="160"></v-progress-circular>
+      </v-row>
+    </v-flex>
+    <v-flex v-else style="overflow-x: auto;" :class="expand && 'flex-column'" class="d-flex my-2">
       <v-card
         class="ma-2"
         width="300"
@@ -20,6 +25,7 @@
       >
         <v-img
           style="background-color: #eaeaea; height: 300;"
+          min-height="300"
           max-height="300"
           :contain="true"
           :src="memory.photoURL"
@@ -30,7 +36,9 @@
             </v-row>
           </template>
         </v-img>
-        <v-card-text>{{ memory.note }}</v-card-text>
+        <v-card-text style="max-height: 64px; overflow-y: auto">
+          <p class="pa-0 ma-0">{{ memory.note }}</p>
+          </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
           <p style="font-size: 8px" class="ml-2 mt-2">{{ memory.sender }}</p>
@@ -53,7 +61,7 @@
             v-else
             prepend-icon="mdi-camera"
             accept="image/*"
-            label="Manda ai tua lembrança!"
+            label="Manda ai uma lembrança! (somente 1 foto por post)"
             @change="vfileAdded"
           ></v-file-input>
           <v-text-field
@@ -82,7 +90,8 @@ export default {
       note: null,
       loading: false,
       expand: false,
-      isAdmin: false
+      isAdmin: false,
+      memoriesLoading: true
     };
   },
   computed: {
@@ -96,8 +105,8 @@ export default {
       "getCollection",
       "addDocument",
       "addImage",
-      'deleteDocument',
-      'deleteImage'
+      "deleteDocument",
+      "deleteImage"
     ]),
     async getMemories() {
       await this.getCollection("louniver");
@@ -108,6 +117,18 @@ export default {
       this.loading = false;
     },
     async submit() {
+      if (!this.photoURL) {
+        alert("Ta faltando a foto aqui...");
+        return;
+      }
+      if (!this.photoURL) {
+        alert("Ta faltando uma descrição...");
+        return;
+      }
+      if (!this.photoURL) {
+        alert("Ta faltando dizer quem ta mandando...");
+        return;
+      }
       this.loading = true;
       this.addDocument({
         collectionName: "louniver",
@@ -120,16 +141,22 @@ export default {
       this.photoURL = null;
       this.note = null;
       this.sender = null;
+      alert("Obrigado pelo envio, manda mais uma se tiver!");
       this.loading = false;
     },
     async deleteNote(memory) {
-        await this.deleteImage(memory.photoURL)
-        await this.deleteDocument({ collectionName: 'louniver', documentId: memory.id })
+      await this.deleteImage(memory.photoURL);
+      await this.deleteDocument({
+        collectionName: "louniver",
+        documentId: memory.id
+      });
     }
   },
   async mounted() {
+    this.memoriesLoading = true;
     await this.getMemories();
-    this.isAdmin = localStorage.getItem('isAdmin')
+    this.memoriesLoading = false;
+    this.isAdmin = Boolean(this.$route.query.admin) 
   }
 };
 </script>
