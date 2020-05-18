@@ -18,8 +18,8 @@
     <v-flex v-else style="overflow-x: auto;" :class="expand && 'flex-column'" class="d-flex my-2">
       <v-card
         class="ma-2"
-        width="300"
-        height="400"
+        min-width="300"
+        min-height="400"
         v-for="(memory, index) in memories"
         :key="index"
       >
@@ -29,6 +29,7 @@
           max-height="300"
           :contain="true"
           :src="memory.photoURL"
+          @click="changeModalPhoto(memory.photoURL)"
         >
           <template v-slot:placeholder>
             <v-row class="fill-height ma-0" align="center" justify="center">
@@ -76,13 +77,16 @@
         </v-card-actions>
       </v-card>
     </v-flex>
+    <ImageModal :photoURL.sync="modalPhoto" />
   </v-container>
 </template>
 
 <script>
 import { mapActions, mapState } from "vuex";
+import ImageModal from '../components/ImageModal'
 
 export default {
+  components: {ImageModal},
   data() {
     return {
       photoURL: null,
@@ -91,7 +95,8 @@ export default {
       loading: false,
       expand: false,
       isAdmin: false,
-      memoriesLoading: true
+      memoriesLoading: true,
+      modalPhoto: null
     };
   },
   computed: {
@@ -145,11 +150,17 @@ export default {
       this.loading = false;
     },
     async deleteNote(memory) {
-      await this.deleteImage(memory.photoURL);
+      // await this.deleteImage(memory.photoURL);
       await this.deleteDocument({
         collectionName: "louniver",
         documentId: memory.id
       });
+    },
+    changeModalPhoto(photo) {
+      this.modalPhoto = ''
+      this.$nextTick(() => {
+        this.modalPhoto = photo
+      })
     }
   },
   async mounted() {
