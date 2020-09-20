@@ -1,10 +1,10 @@
 <template>
   <v-layout column justify-center align-center>
     <v-card class="pa-3 mb-5">
-      <v-card-title @click="goToGame('lou-niver', '')">Niver da Lou?</v-card-title>
+      <v-card-title @click="goToGame('', 'image-game-play')">Image Game?</v-card-title>
 
       <v-card-text>
-      <v-btn @click="goToGame('', 'lou-niver')" large  color="primary">Clique aqui</v-btn>
+      <v-btn @click="goToGame('', 'image-game-play')" large  color="primary">Click here</v-btn>
 
         <p class="pt-5 mt-5">Quer explorar? Fique à vontade!</p>
         </v-card-text>

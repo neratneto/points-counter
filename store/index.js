@@ -8,7 +8,8 @@ const state = () => ({
   initialized: false,
   tranca: [],
   truco: [],
-  louniver: []
+  louniver: [],
+  imagegame: []
 });
 
 const mutations = {
@@ -67,7 +68,7 @@ const actions = {
     };
     
     // Upload the file and metadata
-    var uploadTask = await storageRef.child(`images/lou-niver/${file.name}`).put(file, metadata);
+    var uploadTask = await storageRef.child(`images/game/${file.name}`).put(file, metadata);
     console.log(uploadTask)
     // Upload completed successfully, now we can get the download URL
     const url = await uploadTask.ref.getDownloadURL()
