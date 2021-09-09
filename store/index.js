@@ -5,6 +5,7 @@ import _ from "lodash";
 Vue.use(Vuex);
 
 const state = () => ({
+  toolbar: true,
   initialized: false,
   tranca: [],
   truco: [],
@@ -66,7 +67,7 @@ const actions = {
     var metadata = {
       contentType: 'image/jpeg',
     };
-    
+
     // Upload the file and metadata
     var uploadTask = await storageRef.child(`images/game/${file.name}`).put(file, metadata);
     console.log(uploadTask)
@@ -140,6 +141,9 @@ const actions = {
       body: { deleted: true }
     });
     return response;
+  },
+  async disableToolbar({ commit }) {
+    await commit('setState', { name: 'toolbar', body: false });
   }
 };
 
