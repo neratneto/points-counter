@@ -3,12 +3,13 @@ import Router from 'vue-router'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
-const _341cd1a9 = () => interopDefault(import('../pages/image-game-editor.vue' /* webpackChunkName: "pages/image-game-editor" */))
-const _0ed5b8f0 = () => interopDefault(import('../pages/image-game-play.vue' /* webpackChunkName: "pages/image-game-play" */))
-const _07f11e80 = () => interopDefault(import('../pages/lou-niver.vue' /* webpackChunkName: "pages/lou-niver" */))
-const _084c0de6 = () => interopDefault(import('../pages/tranca.vue' /* webpackChunkName: "pages/tranca" */))
-const _a613ec54 = () => interopDefault(import('../pages/truco.vue' /* webpackChunkName: "pages/truco" */))
-const _2f1f26c5 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
+const _ea49cf86 = () => interopDefault(import('../pages/image-game-editor.vue' /* webpackChunkName: "pages/image-game-editor" */))
+const _e846d6f8 = () => interopDefault(import('../pages/image-game-play.vue' /* webpackChunkName: "pages/image-game-play" */))
+const _0fef8b54 = () => interopDefault(import('../pages/lou-niver.vue' /* webpackChunkName: "pages/lou-niver" */))
+const _01bfffc1 = () => interopDefault(import('../pages/old_index.vue' /* webpackChunkName: "pages/old_index" */))
+const _03381bd2 = () => interopDefault(import('../pages/tranca.vue' /* webpackChunkName: "pages/tranca" */))
+const _32cae32c = () => interopDefault(import('../pages/truco.vue' /* webpackChunkName: "pages/truco" */))
+const _68c3ab59 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
 Vue.use(Router)
 
@@ -21,27 +22,31 @@ export const routerOptions = {
 
   routes: [{
     path: "/image-game-editor",
-    component: _341cd1a9,
+    component: _ea49cf86,
     name: "image-game-editor"
   }, {
     path: "/image-game-play",
-    component: _0ed5b8f0,
+    component: _e846d6f8,
     name: "image-game-play"
   }, {
     path: "/lou-niver",
-    component: _07f11e80,
+    component: _0fef8b54,
     name: "lou-niver"
   }, {
+    path: "/old_index",
+    component: _01bfffc1,
+    name: "old_index"
+  }, {
     path: "/tranca",
-    component: _084c0de6,
+    component: _03381bd2,
     name: "tranca"
   }, {
     path: "/truco",
-    component: _a613ec54,
+    component: _32cae32c,
     name: "truco"
   }, {
     path: "/",
-    component: _2f1f26c5,
+    component: _68c3ab59,
     name: "index"
   }],
 

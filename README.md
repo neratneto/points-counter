@@ -1,4 +1,4 @@
-# contadortrancatruco
+# Afirmatives
 
 > Contador de tranca e truco
 

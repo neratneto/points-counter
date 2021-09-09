@@ -1,7 +1,7 @@
 {
-  "name": "contadortrancatruco",
+  "name": "afirmatives",
   "version": "1.0.0",
-  "description": "Contador de tranca e truco",
+  "description": "Afirmatives",
   "author": "Renato Trombini Neto",
   "private": true,
   "scripts": {
