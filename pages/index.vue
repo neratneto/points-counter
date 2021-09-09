@@ -1,48 +1,100 @@
 <template>
-  <v-layout column justify-center align-center>
-    <v-card class="pa-3 mb-5">
-      <v-card-title @click="goToGame('', 'image-game-play')">Image Game?</v-card-title>
-
-      <v-card-text>
-      <v-btn @click="goToGame('', 'image-game-play')" large  color="primary">Click here</v-btn>
-
-        <p class="pt-5 mt-5">Quer explorar? Fique à vontade!</p>
-        </v-card-text>
-    </v-card>
-      <v-card class="pa-3">
-        <v-card-title class="headline">Bem-vindo ao contador!</v-card-title>
-        <v-divider class="mt-4" />
-        <v-card-text class="my-4">
-          <h2 class="mx-3 mb-4">Quero ir a um jogo existente</h2>
-          <v-text-field class="mx-3" solo label="ID do jogo existente" v-model="gameId"/>
-          <v-btn class="ma-3 mt-0" small color="warning" @click="goToGame(gameId, 'truco')">Ir ao jogo de truco</v-btn>
-          <v-btn class="ma-3 mt-0" small color="error" @click="goToGame(gameId, 'tranca')">Ir ao jogo de tranca</v-btn>
-        </v-card-text>
-        <v-divider />
-        <v-card-text class="my-4">
-          <h2  class="mx-3 mb-4">Quero criar um novo jogo</h2>
-          <v-btn class="ma-3" color="primary" @click="goToGame('new', 'truco')">Novo contador de truco</v-btn>
-          <v-btn class="ma-3" color="success" @click="goToGame('new', 'tranca')">Novo contador de tranca</v-btn>
-        </v-card-text>
-      </v-card>
-  </v-layout>
+<v-layout style="height: 100vh" class="pa-5" @click="next" column justify-center align-center>
+      <p class="ma-5 pa-5 pb-0 subheading">{{ afirmative }}</p>
+        <div style="background-color: #ffe066; width: 40px; height: 4px" />
+    </v-layout>
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions } from 'vuex';
 
 export default {
-  data: () => ({ // Variables of the pages
-    loading: false, // controls the loaders
-    gameId: null // variable for  keeping the inputted gameId
-  }),
-  methods: { // Functions of the page
-    ...mapActions(["addDocument"]), // maps the existing methods
-    goToGame(gameId, gameType) {
-      this.loading = true; // start the loading
-      this.$router.push({ name: gameType, query: { gameId } }); // reroutes to the new game's route
-      this.loading = false; // stops the loading
+  data() {
+    return {
+      afirmatives: [
+    "At any given moment in my life, I have the choice to be happy.",
+    "I always choose it!",
+    "I am a calm and tranquil person",
+    "I have a vibrant and vigorous posture",
+    "I am positive",
+    "I am free of judgement",
+    "I give only constructive criticism",
+    "I accept the choices of others",
+    "I know that everyone has their own pace and way of dealing with situations",
+    "I live my own life",
+    "I love my life",
+    "I help people in the way they wish to be helped",
+    "People know what is better for them",
+    "I radiate happiness inside me and in others ",
+    "I smile all the time",
+    "I am grateful for life and all that happens inside it",
+    "My mind is capable of anything",
+    "I feel ready for every oportunity that life brings me ",
+    "I am sorrounded by love",
+    "I inspire others to do what makes them happy, but their choices are what matters",
+    "I respect people's personal space ",
+    "I deal with confrontation in the most peaceful manner",
+    "I am responsible for My behaviour and My choices, only",
+    "I make daring moves towards my dreams, everyday, that makes me unstoppable",
+    "I do the impossible",
+    "I feel free",
+    "We live all around the world",
+    "I follow a healthy diet ",
+    "My body is perfectly healthy. It can deal with any sickness right away",
+    "I exercise everyday",
+    "I am extremely grateful for my life. ",
+    "My expectations are low, my surprises are high ",
+    "I am an extremely inteligent student, who learns anything with ease",
+    "I use my time to be happy",
+    "In anything i do, i always succeed, because what i am doing is learning, growing and becoming better than i was before",
+    "I chase freedom ",
+    "I am great at meditating",
+    "I am serene and act to situations with patience and tolerance",
+    "My breath is calm and deep",
+    "I am and have been useful",
+    "I am great at inducing and influencing others",
+    "I am careful with what I lead people into and what I propagate",
+    "My days are filled with only good habits"
+  ],
+      index: 0
     }
+  },
+  computed: {
+    afirmative() {
+      return this.afirmatives[this.index]
+    }
+  },
+  methods: {
+    ...mapActions(['disableToolbar']),
+        shuffle(array) {
+      let currentIndex = array.length;
+      let randomIndex = 0;
+      // While there remain elements to shuffle...
+      while (0 !== currentIndex) {
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+        // And swap it with the current element.
+        [array[currentIndex], array[randomIndex]] = [
+          array[randomIndex], array[currentIndex]];
+      }
+      return array;
+    },
+    reset() {
+      this.afirmatives = this.shuffle(this.afirmatives);
+      this.index = 0;
+    },
+    next() {
+      this.index += 1
+      if (this.index >= this.afirmatives.length) {
+        this.reset();
+      }
+    }
+  },
+  mounted() {
+    this.disableToolbar();
+    this.reset();
+    this.next();
   }
-};
+}
 </script>

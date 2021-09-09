@@ -3,6 +3,7 @@
     "rules": "firestore.rules"
   },
   "hosting": {
+    "site": "afirmatives",
     "public": "dist",
     "ignore": [
       "firebase.json",
